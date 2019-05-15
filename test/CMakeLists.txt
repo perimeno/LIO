@@ -16,5 +16,6 @@ target_sources(EventHandledInputTest INTERFACE "EventHandledInput4Test.h")
 target_include_directories(EventHandledInputTest INTERFACE "./")
 
 add_executable(LIO_Test ${testSRCs})
-gtest_discover_tests(LIO_Test)
 target_link_libraries(LIO_Test gmock_main LIOlib)
+gtest_discover_tests(LIO_Test)
+
