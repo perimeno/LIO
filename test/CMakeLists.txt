@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 3.14)
 add_definitions(-std=c++14 -g -c -Wall)
+enable_testing()
 include(FetchContent)
 include(GoogleTest)
 FetchContent_Declare(
