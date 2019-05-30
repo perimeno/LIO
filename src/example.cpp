@@ -32,7 +32,7 @@ void shutDown(){
  */
 void handleSignals(int){
     static bool shutdownInProgress=false;
-    cout<<"Termination event";
+    cout<<"Termination event"<<endl;
     if(!shutdownInProgress){
         shutdownInProgress=true;
         shutDown();
@@ -71,7 +71,7 @@ int main(){
         in_async->StartListening();
         cout<<"Running"<<endl;
         int cnt=0;
-        while (!stop || cnt++>10) {
+        while (!stop && cnt++<10) {
             if(cnt%2){
                 cout<<"OUT: 1"<<endl;
                 out_port->Write(true);
