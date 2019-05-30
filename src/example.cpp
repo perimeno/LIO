@@ -43,10 +43,10 @@ void handleSignals(int){
 }
 
 void OnEvent(){
-    cout<<"IN(Async): ON event!"<<endl;
+    cout<<endl<<"---IN(Async): ON event!---"<<endl;
 }
 void OffEvent(){
-    cout<<"IN(Async): OFF event!"<<endl;
+    cout<<endl<<"---IN(Async): OFF event!---"<<endl;
 }
 
 int main(){
@@ -72,16 +72,18 @@ int main(){
         cout<<"Running"<<endl;
         int cnt=0;
         while (!stop && cnt++<10) {
+            cout<<"Set output to ";
             if(cnt%2){
-                cout<<"OUT: 1"<<endl;
+                cout<<"1"<<endl;
                 out_port->Write(true);
             }
             else{
-                cout<<"OUT: 0"<<endl;
+                cout<<"0"<<endl;
                 out_port->Write(false);
             }
+                  cout<<"Waiting for sync input event...";
             if(in_sync->WaitForValidEvent(2000)){
-                cout<<"IN(sync): "<<in_sync->Read()<<endl;
+                cout<<"Yes: "<<in_sync->Read()<<endl;
             }
             else{
                 cout<<"No sync input event."<<endl;
@@ -90,7 +92,8 @@ int main(){
             this_thread::sleep_for(chrono::seconds(2));
             cout<<"-----------------------------"<<endl;
         }
-        shutDown();
+        if(!stop)
+            shutDown();
     }
     catch(...){
         cout<<"Fatal error."<<endl;
