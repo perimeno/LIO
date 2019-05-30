@@ -81,15 +81,15 @@ int main(){
                 cout<<"0"<<endl;
                 out_port->Write(false);
             }
-                  cout<<"Waiting for sync input event...";
-            if(in_sync->WaitForValidEvent(2000)){
+                  cout<<"Waiting for sync input event..." <<flush;
+            if(in_sync->WaitForValidEvent(4000)){
                 cout<<"Yes: "<<in_sync->Read()<<endl;
             }
             else{
                 cout<<"No sync input event."<<endl;
 
             }
-            this_thread::sleep_for(chrono::seconds(2));
+            this_thread::sleep_for(chrono::seconds(4));
             cout<<"-----------------------------"<<endl;
         }
         if(!stop)
