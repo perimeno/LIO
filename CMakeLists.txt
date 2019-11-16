@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 3.14)
 project(LIO)
-add_subdirectory(test)
-add_subdirectory(src)
-
+add_subdirectory(core)
+if(NOT ONLY_LIO_CORE)
+    add_subdirectory(example)
+    add_subdirectory(linux)
+endif()

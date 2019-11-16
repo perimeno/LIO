@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 3.14)
-add_definitions(-std=c++14 -g -c -Wall)
+set (CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-g -c -Wall)
 enable_testing()
 include(FetchContent)
 include(GoogleTest)
