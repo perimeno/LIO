@@ -1,6 +1,6 @@
-# LIO - Simplified GPIO handling in Linux
+# LIO - Simplified GPIO handling
 
-The purpose of this library is to simplify handling GPIO ports via Linux sysfs from C++ code.
+The purpose of this library is to simplify/unifiy GPIO pin handling in C++. Use this library to handle I/O pins unified, regardless from HW and OS. Hence you can implement platform and hw independent business logic.
 
 # Compilation
 
@@ -8,18 +8,26 @@ Project uses CMake. To compile download and install CMake from https://cmake.org
 ```
 cmake ./CMakeLists.txt -Bbuild
 cd build
-cmake --build .
+cmake --build . -j
 ```
-Compiler should support at least cpp11. You can ignore test build if you comment out(# at the beginning of the line) the followig line in the main CMakeList.txt 
-```
-add_subdirectory(test)
-```
+Compiler should support at least cpp14.
+# Tests
+Unit tests are witten with the help of [gtest/gmock](https://github.com/google/googletest) framework. You can enable them to set BUILD_TESTS cmake veriable.
+
+# Linux
+Two implementation are provided to use the library in user space in Linux environment. Legacy Sysfs and the new gpiolib. both of the implementation are located under ```./linux``` directory.
+
 # Example
 
-The sw tested on raspberry pi zero w, and the example code contains the pin nuber of this board (https://cdn.sparkfun.com/assets/learn_tutorials/6/7/6/PiZero_1.pdf). However you can use the code on any hardware that runs a linux that support sysfs.
+Example was tested on Raspiabian 10 (buster). HW was a Raspberry Pi 4. The example SW generate 4s wavelength square wave on pin 20 and 16, and creates async linstener on pin 26 and 19. Output waveform
+![image](https://drive.google.com/uc?export=view&id=1ZKiBaM_AWzEz-Xh1iYnUETskyw_uQUv4)
+20, 26 pins are driven by sysfs, 16, 19 pins are driven buy gpiolib implementation.
+![image](https://drive.google.com/uc?export=view&id=1nP0yvO1XOLX3UUR4O4zjKIAb8EN0DDy2)
 
-Example inializes an output port (14), an asyn input port (2) and a sync input port(3). During every iteration the output port changes its state and wait 2 seconds to detect sync input change. Beside that there is an other thread that watches the async input and executes the proper function if the input changes. Both inputs are pulled up on this board, so you need to pull down them to GND to see input change.
-Every change (both inputs and output) are logged to the standard output.
+If you pull up input pins to 3.3V or pull down to GND, std output should show that the event occurred. Sysfs implementation are attached to a SW implemented debouncer.
+
+# Release notes
+v2.0 are not backwards compatible to v1.0. Sorry about that.
 
 ## License
 
