@@ -15,7 +15,7 @@ Compiler should support at least cpp14.
 Unit tests are witten with the help of [gtest/gmock](https://github.com/google/googletest) framework. You can enable them to set BUILD_TESTS cmake veriable.
 
 # Linux
-Two implementation are provided to use the library in user space in Linux environment. Legacy Sysfs and the new gpiolib. both of the implementation are located under ```./linux``` directory.
+Two implementation are provided to use the library in user space in Linux environment. Legacy Sysfs and the new gpiolib. both of the implementation are located under ```./linux``` directory. If you need performance critical IO driving, you should consider to write a driver for your applcation and use new GPIOlib features. Kernel also provide various of functionalities (including debouncing) so it worths a try. This library and the implemetation of IO driving in linux tries to make easier taking the first step and simplify GPIO handling from user space.
 
 # Example
 
