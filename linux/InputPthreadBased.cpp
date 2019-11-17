@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 using namespace std;
+using namespace LIO;
 InputPthreadBased::InputPthreadBased():fd{-1},threadExitRequest{false},threadState{listenerThreadState::stopped}
 {
 }

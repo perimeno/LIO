@@ -2,7 +2,7 @@
 #include <condition_variable>
 
 using namespace std;
-
+using namespace LIO;
 DebouncerStrategyImpulseRepeat::DebouncerStrategyImpulseRepeat(BasicTimer& timer)
     :timer(timer),repState(repeatState::firstExecution),actualStrategy(repeatStrategy.end()){
     timer.SetRepeatMode(BasicTimer::repeatMode::continuous);

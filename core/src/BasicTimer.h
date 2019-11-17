@@ -2,6 +2,7 @@
 #define IBASICTIMER_H
 #include <chrono>
 #include <functional>
+namespace LIO {
 
 /**
  * @brief The BasicTimer Interfacce
@@ -19,4 +20,5 @@ public:
     virtual void StopAndReset()=0;
     virtual void SetRepeatMode(repeatMode)=0;
 };
+}
 #endif

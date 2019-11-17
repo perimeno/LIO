@@ -1,7 +1,7 @@
 #ifndef DEBOUNCESSTRATEGYSIMPLE_H
 #define DEBOUNCESSTRATEGYSIMPLE_H
 #include "DebouncerStrategy.h"
-
+namespace LIO {
 /**
  * @brief This strategy simple path the valid input to valid output
  * i.e. valid 0->1 transmission and after that login 1 input events
@@ -15,7 +15,7 @@ public:
     virtual void handleOnEvent() override;
     virtual void handleOffEvent() override;
 };
-
+}
 
 
 #endif // DEBOUNCESSTRATEGYSIMPLE_H

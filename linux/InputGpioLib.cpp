@@ -9,7 +9,7 @@
 #include "InputGpioLib.h"
 
 using namespace std;
-
+using namespace LIO;
 
 InputGpioLib::InputGpioLib(const char *chipName, uint32_t pinNo):pinNo{pinNo}{
     stringstream ss;

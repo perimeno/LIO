@@ -9,7 +9,7 @@
 #include "Debouncer.h"
 #include "DebouncerStrategyCbOnlyOnce.h"
 
-
+namespace LIO {
 template <typename TDebouncerStrategy=DebouncerStrategyCbOnlyOnce>
 /**
  * @brief The purpose of this class to debounce a raw input pin data asynchronously. It uses
@@ -64,5 +64,5 @@ public:
         strategy.setOffCallback(offCallback);
     }
 };
-
+}
 #endif // DEBOUNCEDLISTENER_H

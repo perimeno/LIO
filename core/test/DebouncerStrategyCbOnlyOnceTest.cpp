@@ -2,6 +2,7 @@
 #include <DebouncerStrategyCbOnlyOnce.h>
 
 using namespace std;
+using namespace LIO;
 
 class DebouncerStrategyCbOnlyOnceTest: public testing::Test{
 public:

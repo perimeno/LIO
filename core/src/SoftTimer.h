@@ -6,7 +6,7 @@
 
 #include "BasicTimer.h"
 #include "MySignal.h"
-
+namespace LIO {
 /**
  * @brief SW implementation of a basicTimer
  */
@@ -30,6 +30,6 @@ private:
     void timerTask(std::promise<void>&& exitPromise);
     MySignal s;
 };
-
+}
 
 #endif

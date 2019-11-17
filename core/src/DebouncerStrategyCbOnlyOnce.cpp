@@ -1,6 +1,6 @@
 #include "DebouncerStrategyCbOnlyOnce.h"
 
-
+using namespace LIO;
 void DebouncerStrategyCbOnlyOnce::handleOnEvent(){
     if(onCb && myState==state::off){
         onCb();

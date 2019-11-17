@@ -1,6 +1,7 @@
 #include "InputPin.h"
 
 using namespace std;
+using namespace LIO;
 
 InputPin::InputPin():eventCb(bind(&InputPin::dummyCb,this)){
 }

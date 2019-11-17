@@ -3,6 +3,7 @@
 #include <Debouncer.h>
 #include <SoftTimer.h>
 using namespace std;
+using namespace LIO;
 
 class DebouncerStrategyImpulseRepeatTest: public testing::Test{
 public:

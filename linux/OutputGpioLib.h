@@ -1,7 +1,7 @@
 #ifndef OUTPUTGPIOLIB_H
 #define OUTPUTGPIOLIB_H
 #include "OutputPin.h"
-
+namespace LIO {
 /**
  * @brief GPIOLIB based implementation of an output pin
  */
@@ -25,5 +25,5 @@ public:
     virtual void Write(bool val) override;
     virtual uint32_t GetPinNo() override;
 };
-
+}
 #endif // OUTPUTGPIOLIB_H

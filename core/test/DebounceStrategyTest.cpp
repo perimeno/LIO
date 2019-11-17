@@ -2,6 +2,7 @@
 #include "DeboucerStrategy_mock.h"
 
 using namespace std;
+using namespace LIO;
 
 class DebounceStrategyTest : public testing::Test{
 public:

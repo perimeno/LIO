@@ -4,6 +4,7 @@
 #include "InputPthreadBased.h"
 #include <cstdint>
 #include <future>
+namespace LIO {
 
 /**
  * @brief The Implements InputPin with character device (GPIOLIB) interface
@@ -31,5 +32,6 @@ public:
 protected:
     virtual void listenerThreadRunnable(std::promise<void> &&threadExitPromise, int fileDescriptor) override;
 };
+}
 
 #endif // INPUTGPIOLIB_H

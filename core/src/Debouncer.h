@@ -8,7 +8,7 @@
 
 #include "DebouncerStrategy.h"
 #include "BasicTimer.h"
-
+namespace LIO {
 /**
  *  @brief This class implements a debouncer logic
 */
@@ -55,5 +55,5 @@ public:
     void on();
 
 };
-
+}
 #endif

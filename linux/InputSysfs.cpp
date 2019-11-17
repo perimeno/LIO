@@ -10,6 +10,8 @@
 #include <sys/epoll.h>
 
 using namespace std;
+using namespace LIO;
+
 InputSysfs::InputSysfs(uint32_t pinNo):sysfsWrapper(pinNo){
     sysfsWrapper.SetDirection(SysfsWrapper::Direction::Input);
      fd=open(string(sysfsWrapper.GetPinBasePath()+"value").c_str(),O_RDONLY | O_NONBLOCK);

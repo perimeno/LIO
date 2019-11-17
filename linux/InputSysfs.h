@@ -4,7 +4,7 @@
 #include <SysfsWrapper.h>
 #include <atomic>
 #include <future>
-
+namespace LIO {
 /**
  * @brief Sysfs based implementation of InputPin
  */
@@ -24,6 +24,6 @@ protected:
     virtual void listenerThreadRunnable(std::promise<void>&& threadExitPromise,int fileDescriptor) override;
 };
 
-
+}
 
 #endif // INPUTSYSFS_H

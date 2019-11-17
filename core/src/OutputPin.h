@@ -1,6 +1,7 @@
 #ifndef IOUTPUTPIN_H
 #define IOUTPUTPIN_H
 #include <cstdint>
+namespace LIO {
 /**
  * @brief Represents an output pin
  */
@@ -11,5 +12,5 @@ public:
     virtual void Write(bool val)=0;
     virtual uint32_t GetPinNo()=0;
 };
-
+}
 #endif // IOUTPUTPORT_H

@@ -2,6 +2,8 @@
 #define OUTPUTSYSFS_H
 #include "OutputPin.h"
 #include "SysfsWrapper.h"
+
+namespace LIO {
 /**
  * @brief Sysfs based implementation of an output pin
  */
@@ -30,5 +32,6 @@ public:
     virtual void Write(bool val) override;
     virtual uint32_t GetPinNo() override;
 };
+}
 
 #endif // OUTPUTSYSFS_H

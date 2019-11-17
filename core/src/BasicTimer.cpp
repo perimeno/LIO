@@ -1,5 +1,5 @@
 #include <BasicTimer.h>
-
+using namespace LIO;
 
 BasicTimer::BasicTimer():timeoutCallback([]{}){
 

@@ -8,7 +8,7 @@
 #include "OutputGpioLib.h"
 
 using namespace std;
-
+using namespace LIO;
 
 OutputGpioLib::OutputGpioLib(const char *chipName, uint32_t pinNo){
     stringstream ss;

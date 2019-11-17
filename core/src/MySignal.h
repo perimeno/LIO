@@ -3,6 +3,7 @@
 #include <condition_variable>
 #include <mutex>
 #include <chrono>
+namespace LIO {
 /**
  * @brief The MySignal helper class that handles spurious wakeup
  */
@@ -34,4 +35,5 @@ public:
     void signal();
 
 };
+}
 #endif

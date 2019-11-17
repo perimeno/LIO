@@ -1,4 +1,5 @@
 #include "DebouncerStrategy.h"
+using namespace LIO;
 DebouncerStrategy::DebouncerStrategy():onCb([]{}),offCb([]{}){
 
 }

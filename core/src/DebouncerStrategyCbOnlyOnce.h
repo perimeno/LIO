@@ -1,7 +1,7 @@
 #ifndef DEBOUNCERSTRATEGYCBONLYONCE_H
 #define DEBOUNCERSTRATEGYCBONLYONCE_H
 #include "DebouncerStrategy.h"
-
+namespace LIO {
 /**
  * @brief This strategy emits only one event regardles the length
  * of valid 1 input. if input goes back to 0 it will emit another event
@@ -16,6 +16,6 @@ public:
     virtual void handleOnEvent() override;
     virtual void handleOffEvent() override;
 };
-
+}
 
 #endif // DEBOUNCERSTRATEGYCBONLYONCE_H

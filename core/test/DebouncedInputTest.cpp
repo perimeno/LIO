@@ -8,7 +8,7 @@
 
 using namespace std;
 using testing::Return;
-
+using namespace LIO;
 
 class DebouncedInputTest : public testing::Test{
 public:

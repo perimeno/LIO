@@ -3,7 +3,9 @@
 #include <functional>
 
 using namespace std;
+using namespace LIO;
 using testing::Return;
+
 class InputPinTest:public testing::Test{
 public:
     InputPin_mock subject;

@@ -6,6 +6,7 @@
 #include "SoftTimer.h"
 
 using namespace std;
+using namespace LIO;
 using testing::Return;
 
 ACTION_P(SignalCallback,promise){

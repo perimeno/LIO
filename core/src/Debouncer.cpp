@@ -2,6 +2,7 @@
 #include <functional>
 #include <iostream>
 using namespace std;
+using namespace LIO;
 Debouncer::Debouncer(BasicTimer& timer):debouncerStrategy(nullptr),timer(timer),myState{State::off},timerMode{TimerMode::initial}{
 }
 Debouncer::~Debouncer(){

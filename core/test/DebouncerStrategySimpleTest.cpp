@@ -4,6 +4,7 @@
 #include <future>
 #include "BasicTimerMock.h"
 using namespace std;
+using namespace LIO;
 
 class DebouncerStrategySimpleTest: public testing::Test{
 public:

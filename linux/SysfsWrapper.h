@@ -6,6 +6,7 @@
 #include <fstream>
 #include <memory>
 
+namespace LIO {
 /**
  * @brief Helper class to handle sysfs io interface
  */
@@ -30,5 +31,6 @@ public:
     uint32_t GetPinNo();
 
 };
+}
 
 #endif // SYSFSWRAPPER_H

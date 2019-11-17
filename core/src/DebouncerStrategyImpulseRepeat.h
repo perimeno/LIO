@@ -6,7 +6,7 @@
 #include <mutex>
 #include <atomic>
 #include <BasicTimer.h>
-
+namespace LIO {
 /**
  * @brief This strategy emits event according to the determined repeat
  * strategy in case of vald 1 input
@@ -56,5 +56,5 @@ private:
     std::list<RepeatInfo>::iterator actualStrategy;
     void callOnCbIfPossible();
 };
-
+}
 #endif // DEBOUNCESSTRATEGYIMPULSEREPEAT_H

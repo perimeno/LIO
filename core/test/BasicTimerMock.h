@@ -1,7 +1,7 @@
 #pragma once
 #include <gmock/gmock.h>
 #include <BasicTimer.h>
-class BasicTimerMock:public BasicTimer{
+class BasicTimerMock:public LIO::BasicTimer{
 
     // IBasicTimer interface
 public:

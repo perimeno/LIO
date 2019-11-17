@@ -2,7 +2,7 @@
 #include <thread>
 #include <functional>
 #include <chrono>
-
+using namespace LIO;
 using namespace std;
 SoftTimer::SoftTimer():repMode(repeatMode::single),myState(state::idle),
 timerThreadExitRequest(false){

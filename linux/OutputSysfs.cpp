@@ -1,5 +1,7 @@
 #include "OutputSysfs.h"
 
+using namespace LIO;
+
 OutputSysfs::OutputSysfs(uint32_t pinNo):port(pinNo){
     port.SetDirection(SysfsWrapper::Direction::Output);
 }

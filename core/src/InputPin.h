@@ -4,7 +4,7 @@
 #include <condition_variable>
 #include <chrono>
 #include <functional>
-
+namespace LIO {
 /**
  * @brief This class represents an input pin.
  */
@@ -41,7 +41,7 @@ protected:
     void callEventCallback();
     InputPin();
 };
-
+}
 
 
 #endif

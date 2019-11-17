@@ -3,6 +3,7 @@
 #include <InputPin.h>
 #include <future>
 
+namespace LIO {
 /**
  * @brief Helper class for sync input listener. It simplifies thread handling
  */
@@ -23,5 +24,6 @@ private:
     pthread_t threadNativeId;
 
 };
+}
 
 #endif // INPUTPTHREADBASED_H

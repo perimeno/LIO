@@ -2,7 +2,7 @@
 #include <gmock/gmock.h>
 #include "InputPin.h"
 
-class InputPin_mock : public InputPin{
+class InputPin_mock : public LIO::InputPin{
 public:
     MOCK_METHOD1(SetTriggerEdge,void(TriggerEdge edge));
     MOCK_METHOD1(SetPullUpDown, void(PullUpDown pud));

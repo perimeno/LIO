@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 using namespace std;
-
+using namespace LIO;
 
 SysfsWrapper::SysfsWrapper(uint32_t pinNo):_pinNo(pinNo),basePath("/sys/class/gpio"),pinBasePath(""){
     stringstream ss;

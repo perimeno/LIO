@@ -11,6 +11,7 @@
 
 
 using namespace std;
+using namespace LIO;
 
 class Debounce_test : public ::testing::Test{
 

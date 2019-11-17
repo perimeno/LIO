@@ -2,7 +2,7 @@
 #define DEBOUNCERSTRATEGY_H
 
 #include <functional>
-
+namespace LIO {
 /**
  * @brief Implementation of this class should determine how @Debouncer should
  * handle the stream of event. i.e. input is 1 continously. These implementation
@@ -22,5 +22,5 @@ public:
     void setOnCallback(std::function<void()>);
     void setOffCallback(std::function<void()>);
 };
-
+}
 #endif // DEBOUNCERSTRATEGY_H
