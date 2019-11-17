@@ -1,4 +1,4 @@
-# LIO - Simplified GPIO handling
+# LIO - Simplified GPIO handling in C++
 
 The purpose of this library is to simplify/unifiy GPIO pin handling in C++. Use this library to handle I/O pins unified, regardless from HW and OS. Hence you can implement platform and hw independent business logic.
 
