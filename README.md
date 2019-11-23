@@ -11,6 +11,9 @@ cd build
 cmake --build . -j
 ```
 Compiler should support at least cpp14.
+
+From release-2.0.3 you can generate the project with cake 3.13. It means you are able to use the officially shipped cmake package 
+on raspian.
 # Tests
 Unit tests are witten with the help of [gtest/gmock](https://github.com/google/googletest) framework. You can enable them to set BUILD_TESTS cmake veriable.
 
