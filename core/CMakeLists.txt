@@ -13,6 +13,7 @@ if(${Threads_FOUND})
 endif()
 target_include_directories(LIOlib PUBLIC "./src")
 target_link_libraries(LIOlib)
+
 if(BUILD_TESTS)
     add_subdirectory(test)
 endif()

@@ -7,8 +7,6 @@ file(GLOB LinuxSRCs
     "*.cpp"
 )
 
-include_directories(${libgpiod_SOURCE_DIR})
-
 add_library(LIOLinuxlib ${LinuxSRCs})
 target_link_libraries(LIOLinuxlib LIOlib)
 target_include_directories(LIOlib PUBLIC ".")
