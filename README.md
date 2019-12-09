@@ -3,7 +3,7 @@
 The purpose of this library is to simplify/unifiy GPIO pin handling in C++. Use this library to handle I/O pins unified, regardless from HW and OS. Hence you can implement platform and hw independent business logic.
 # Implementation
 
-## Linux (any linux based OS, i.e. Raspbian-Raspbery)
+## Linux (any linux based OS, i.e.: Raspbian for Raspbery PIs)
 * GPIOLib
 * Sysfs (legacy)
 Both of the implementation can be used from user space (user shoud be in gpio group). They are located under ```./linux``` directory. If you need performance critical IO driving, you should consider to write a driver for your applcation and use new GPIOlib features. Kernel also provide various of functionalities (including debouncing) so it worths a try. This library and the implemetation of IO driving in linux tries to make easier taking the first step and simplify GPIO handling from user space.
