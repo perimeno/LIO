@@ -2,11 +2,26 @@
 #define INPUTPORT_H
 #include <InputPin.h>
 #include <cstdint>
-class InputPin_ESP32:public LIO::InputPin{
+#include <atomic>
+#include <future>
+#include <driver/gpio.h>
+#include <MySignal.h>
+namespace LIO{
 
+class InputPin_ESP32:public InputPin{
 
-    // InputPin interface
+protected:
+    std::atomic<bool> threadExitRequest;
+private:
+    std::future<void> exitPerformed;
+    enum class listenerThreadState{stopped,started};
+    listenerThreadState threadState;
+    void listenerThreadRunnable(std::promise<void>&& threadExitPromise);
+    gpio_num_t gpioNo;
+    MySignal signal;
+    static void IRAM_ATTR ISR(void*);
 public:
+    explicit InputPin_ESP32(gpio_num_t inputPinNo);
     virtual void SetTriggerEdge(TriggerEdge edge) override;
     virtual void SetPullUpDown(PullUpDown pud) override;
     virtual void StartListening() override;
@@ -14,4 +29,5 @@ public:
     virtual bool Read() override;
     virtual uint32_t GetPinNo() override;
 };
+}
 #endif
