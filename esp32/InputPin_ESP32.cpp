@@ -7,7 +7,8 @@
 using namespace std;
 using namespace LIO;
 
-InputPin_ESP32::InputPin_ESP32(gpio_num_t inputPinNo):threadExitRequest{false},threadState{listenerThreadState::stopped},gpioNo{inputPinNo}{
+InputPin_ESP32::InputPin_ESP32(gpio_num_t inputPinNo)
+        :threadExitRequest{false},threadState{listenerThreadState::stopped},gpioNo{inputPinNo},eventQueue{xQueueCreate(10, sizeof(char))}{
     gpio_set_direction(gpioNo,gpio_mode_t::GPIO_MODE_INPUT);
     gpio_intr_disable(gpioNo);
     static bool justOnce=false;
@@ -54,13 +55,12 @@ void InputPin_ESP32::SetPullUpDown(LIO::InputPin::PullUpDown pud){
 
 void InputPin_ESP32::StartListening(){
     if(threadState==listenerThreadState::stopped){
-//        std::promise<void> p;
-//        exitPerformed=p.get_future();
-//        thread t(bind(&InputPin_ESP32::listenerThreadRunnable,this,placeholders::_1),move(p));
+        std::promise<void> p;
+        exitPerformed=p.get_future();
+        thread t(bind(&InputPin_ESP32::listenerThreadRunnable,this,placeholders::_1),move(p));
         threadState=listenerThreadState::started;
-//        t.detach();
+        t.detach();
         gpio_isr_handler_add(gpioNo,InputPin_ESP32::ISR,reinterpret_cast<void*>(this));
-        cout<<"thread started"<<endl;
         gpio_intr_enable(gpioNo);
     }
     else
@@ -69,11 +69,12 @@ void InputPin_ESP32::StartListening(){
 
 void InputPin_ESP32::StopListening(){
     if(threadState==listenerThreadState::started){
-//        threadExitRequest=true;
-//        signal.signal();
-//        while(exitPerformed.wait_for(10ms)!=future_status::ready){
-//            signal.signal();
-//        }
+        threadExitRequest=true;
+        char c='x';
+        xQueueSendToFront(eventQueue,&c,0);
+        while(exitPerformed.wait_for(10ms)!=future_status::ready){
+            xQueueSendToFront(eventQueue,&c,0);
+        }
         threadState=listenerThreadState::stopped;
         gpio_intr_disable(gpioNo);
         gpio_isr_handler_remove(gpioNo);
@@ -81,28 +82,26 @@ void InputPin_ESP32::StopListening(){
 }
 void InputPin_ESP32::listenerThreadRunnable(std::promise<void> &&threadExitPromise)
 {
+    char buff;
+    xQueueReset(eventQueue);
     while(!threadExitRequest){
-        signal.wait();
-        if(threadExitRequest)
-            break;
-        callEventCallback();
-        this_thread::sleep_for(10ms);
+        if(xQueueReceive(eventQueue,&buff,portMAX_DELAY)==pdPASS){
+            if(threadExitRequest)
+                break;
+            callEventCallback();
+        }
     }
     threadExitPromise.set_value_at_thread_exit();
 }
 
 void InputPin_ESP32::ISR(void *context)
 {
-    cout<<"executed"<<endl;
-//    InputPin_ESP32* instance=reinterpret_cast<InputPin_ESP32*>(context);
-//    instance->signal.signal();
+    InputPin_ESP32* ctx=reinterpret_cast<InputPin_ESP32*>(context);
+    char x='c';
+    BaseType_t t=pdFALSE;
+    xQueueSendToBackFromISR(ctx->eventQueue,&x,&t);
 }
 
-//void IRAM_ATTR InputPin_ESP32::ISR(void * context)
-//{
-//    InputPin_ESP32* instance=reinterpret_cast<InputPin_ESP32*>(context);
-//    instance->signal.signal();
-//}
 bool InputPin_ESP32::Read()
 {
     return gpio_get_level(gpioNo);

@@ -6,6 +6,9 @@
 #include <future>
 #include <driver/gpio.h>
 #include <MySignal.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/queue.h>
+
 namespace LIO{
 
 class InputPin_ESP32:public InputPin{
@@ -18,8 +21,8 @@ private:
     listenerThreadState threadState;
     void listenerThreadRunnable(std::promise<void>&& threadExitPromise);
     gpio_num_t gpioNo;
-    MySignal signal;
     static void IRAM_ATTR ISR(void*);
+    QueueHandle_t eventQueue;
 public:
     explicit InputPin_ESP32(gpio_num_t inputPinNo);
     virtual void SetTriggerEdge(TriggerEdge edge) override;

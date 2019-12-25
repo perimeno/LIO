@@ -2,7 +2,7 @@
 #define SOFTTIMER_H
 #include <future>
 #include <atomic>
-#include <condition_variable>
+#include <mutex>
 
 #include "BasicTimer.h"
 #include "MySignal.h"
@@ -21,10 +21,13 @@ public:
     virtual void SetRepeatMode(repeatMode) override;
 
 private:
+
     std::atomic<repeatMode> repMode;
     enum class state{idle,running};
     std::atomic<state> myState;
-    std::atomic<std::chrono::milliseconds> timeout;
+    std::mutex _64bitAtomic;
+    std::chrono::milliseconds timeout;
+//    std::atomic<std::chrono::milliseconds> timeout;
     std::atomic<bool> timerThreadExitRequest;
     std::future<void> timerThreadFuture;
     void timerTask(std::promise<void>&& exitPromise);

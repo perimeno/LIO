@@ -21,6 +21,7 @@ SoftTimer::~SoftTimer(){
 }
 
 void SoftTimer::SetTimeout(std::chrono::milliseconds timeout){
+    unique_lock<mutex> lck(_64bitAtomic);
     this->timeout=timeout;
 }
 
@@ -43,6 +44,7 @@ void SoftTimer::SetRepeatMode(BasicTimer::repeatMode newRepMode){
 }
 
 void SoftTimer::timerTask(std::promise<void> &&exitPromise){
+    chrono::microseconds protectedTimeout;
     while(!timerThreadExitRequest){
         switch(myState){
             case state::idle:{
@@ -50,7 +52,11 @@ void SoftTimer::timerTask(std::promise<void> &&exitPromise){
                 break;
             }
             case state::running:{
-                if(s.wait_for(timeout.load())==MySignal::sig_status::timeout){
+                {
+                    unique_lock<mutex> l(_64bitAtomic);
+                    protectedTimeout=timeout;
+                }
+                if(s.wait_for(protectedTimeout)==MySignal::sig_status::timeout){
                     timeoutCallback();
                     switch(repMode){
                         case repeatMode::single:
