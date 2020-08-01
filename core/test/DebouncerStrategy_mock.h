@@ -1,8 +1,8 @@
 #pragma once
 #include <gmock/gmock.h>
-#include <DebouncerStrategy.h>
+#include <DebouncerImpuseRepeatStrategy.h>
 
-class DeboucerStrategy_mock:public LIO::DebouncerStrategy{
+class DebouncerStrategy_mock:public LIO::DebouncerImpulseRepeatStrategy{
 public:
     MOCK_METHOD0(handleOffEvent,void ());
     MOCK_METHOD0(handleOnEvent,void());

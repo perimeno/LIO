@@ -4,7 +4,6 @@
 
 #include "InputPin_mock.h"
 #include "BasicTimerMock.h"
-#include "DebouncerStrategySimple.h"
 
 using namespace std;
 using testing::Return;

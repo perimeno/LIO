@@ -27,7 +27,7 @@ void Debouncer::setDebounceInterval(std::chrono::milliseconds interv){
     timer.SetTimeout(interv);
 }
 
-void Debouncer::setStrategy(DebouncerStrategy * strategy){
+void Debouncer::setStrategy(DebouncerImpulseRepeatStrategy * strategy){
     volatile unique_lock<mutex>lck(strategyMutex);
     debouncerStrategy=strategy;
 }

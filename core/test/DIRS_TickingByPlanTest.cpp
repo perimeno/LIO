@@ -1,15 +1,15 @@
 #include <gmock/gmock.h>
-#include <DebouncerStrategyImpulseRepeat.h>
+#include <DIRS_TickingByPlan.h>
 #include <Debouncer.h>
 #include <SoftTimer.h>
 using namespace std;
 using namespace LIO;
 
-class DebouncerStrategyImpulseRepeatTest: public testing::Test{
+class DIRS_TickingByPlanTest: public testing::Test{
 public:
     SoftTimer timer_debouncer;
     SoftTimer timer_strategy;
-    DebouncerStrategyImpulseRepeat subject{timer_strategy};
+    DIRS_TickingByPlan subject{timer_strategy};
     Debouncer debouncer{timer_debouncer};
     MOCK_METHOD0(onCallback,void());
     MOCK_METHOD0(offCallback,void());
@@ -18,26 +18,26 @@ protected:
     virtual void SetUp() override;
 };
 
-void DebouncerStrategyImpulseRepeatTest::SetUp(){
-    subject.setOnCallback(bind(&DebouncerStrategyImpulseRepeatTest::onCallback,this));
-    subject.setOffCallback(bind(&DebouncerStrategyImpulseRepeatTest::offCallback,this));
+void DIRS_TickingByPlanTest::SetUp(){
+    subject.setOnCallback(bind(&DIRS_TickingByPlanTest::onCallback,this));
+    subject.setOffCallback(bind(&DIRS_TickingByPlanTest::offCallback,this));
     debouncer.setStrategy(&subject);
     debouncer.setDebounceInterval(1ms);
 }
-TEST_F(DebouncerStrategyImpulseRepeatTest,OnEmpty){
+TEST_F(DIRS_TickingByPlanTest,OnEmpty){
     EXPECT_CALL(*this,onCallback()).Times(0);
     EXPECT_CALL(*this,offCallback()).Times(0);
     debouncer.on();
     this_thread::sleep_for(5ms);
 }
-TEST_F(DebouncerStrategyImpulseRepeatTest,OnOneItem){
+TEST_F(DIRS_TickingByPlanTest,OnOneItem){
     subject.setRepeatStrategy({{1ms,5}});
     EXPECT_CALL(*this,onCallback()).Times(5);
     EXPECT_CALL(*this,offCallback()).Times(0);
     debouncer.on();
     this_thread::sleep_for(100ms);
 }
-TEST_F(DebouncerStrategyImpulseRepeatTest,Interval){
+TEST_F(DIRS_TickingByPlanTest,Interval){
     subject.setRepeatStrategy({{200ms,3}});
 
     EXPECT_CALL(*this,onCallback()).Times(1);
@@ -55,7 +55,7 @@ TEST_F(DebouncerStrategyImpulseRepeatTest,Interval){
     this_thread::sleep_for(400ms);
 }
 
-TEST_F(DebouncerStrategyImpulseRepeatTest,MultipleItem){
+TEST_F(DIRS_TickingByPlanTest,MultipleItem){
     subject.setRepeatStrategy({{1ms,2},{100ms,3}});
     EXPECT_CALL(*this,onCallback()).Times(2);
     EXPECT_CALL(*this,offCallback()).Times(0);

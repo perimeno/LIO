@@ -1,6 +1,6 @@
-#ifndef DEBOUNCESSTRATEGYIMPULSEREPEAT_H
-#define DEBOUNCESSTRATEGYIMPULSEREPEAT_H
-#include "DebouncerStrategy.h"
+#ifndef DIRS_TICKINGBYPLAN_H
+#define DIRS_TICKINGBYPLAN_H
+#include "DebouncerImpuseRepeatStrategy.h"
 #include <chrono>
 #include <list>
 #include <mutex>
@@ -11,7 +11,7 @@ namespace LIO {
  * @brief This strategy emits event according to the determined repeat
  * strategy in case of vald 1 input
  */
-class DebouncerStrategyImpulseRepeat : public DebouncerStrategy
+class DIRS_TickingByPlan : public DebouncerImpulseRepeatStrategy
 {
 
 public:
@@ -29,8 +29,8 @@ public:
          */
         uint32_t multiplier;
     };
-    DebouncerStrategyImpulseRepeat(BasicTimer& timer);
-    virtual ~DebouncerStrategyImpulseRepeat()override;
+    DIRS_TickingByPlan(BasicTimer& timer);
+    virtual ~DIRS_TickingByPlan()override;
     virtual void handleOnEvent() override;
     virtual void handleOffEvent() override;
     /**
@@ -57,4 +57,4 @@ private:
     void callOnCbIfPossible();
 };
 }
-#endif // DEBOUNCESSTRATEGYIMPULSEREPEAT_H
+#endif // DIRS_TICKINGBYPLAN_H

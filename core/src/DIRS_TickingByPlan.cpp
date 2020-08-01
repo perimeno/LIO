@@ -1,20 +1,20 @@
-#include "DebouncerStrategyImpulseRepeat.h"
+#include "DIRS_TickingByPlan.h"
 #include <condition_variable>
 
 using namespace std;
 using namespace LIO;
-DebouncerStrategyImpulseRepeat::DebouncerStrategyImpulseRepeat(BasicTimer& timer)
+DIRS_TickingByPlan::DIRS_TickingByPlan(BasicTimer& timer)
     :timer(timer),repState(repeatState::firstExecution),actualStrategy(repeatStrategy.end()){
     timer.SetRepeatMode(BasicTimer::repeatMode::continuous);
-    timer.SetTimeoutCallback(bind(&DebouncerStrategyImpulseRepeat::callOnCbIfPossible,this));
+    timer.SetTimeoutCallback(bind(&DIRS_TickingByPlan::callOnCbIfPossible,this));
 }
 
-DebouncerStrategyImpulseRepeat::~DebouncerStrategyImpulseRepeat(){
+DIRS_TickingByPlan::~DIRS_TickingByPlan(){
     timer.StopAndReset();
 
 }
 
-void DebouncerStrategyImpulseRepeat::handleOnEvent(){
+void DIRS_TickingByPlan::handleOnEvent(){
     if(repState==repeatState::firstExecution){
         repState=repeatState::normal;
         callOnCbIfPossible();
@@ -22,13 +22,13 @@ void DebouncerStrategyImpulseRepeat::handleOnEvent(){
     timer.Start();
 }
 
-void DebouncerStrategyImpulseRepeat::handleOffEvent(){
+void DIRS_TickingByPlan::handleOffEvent(){
     repState=repeatState::firstExecution;
     timer.StopAndReset();
     offCb();
 }
 
-void DebouncerStrategyImpulseRepeat::setRepeatStrategy(std::list<DebouncerStrategyImpulseRepeat::RepeatInfo> strategy){
+void DIRS_TickingByPlan::setRepeatStrategy(std::list<DIRS_TickingByPlan::RepeatInfo> strategy){
     repState=repeatState::firstExecution;
     timer.StopAndReset();
     unique_lock<mutex> lck(repeatStrategyMutex);
@@ -37,7 +37,7 @@ void DebouncerStrategyImpulseRepeat::setRepeatStrategy(std::list<DebouncerStrate
 
 }
 
-void DebouncerStrategyImpulseRepeat::callOnCbIfPossible(){
+void DIRS_TickingByPlan::callOnCbIfPossible(){
     unique_lock<mutex> lck(repeatStrategyMutex);
     bool exit=false;
     while(actualStrategy!=repeatStrategy.end()){

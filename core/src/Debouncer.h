@@ -6,7 +6,7 @@
 #include <mutex>
 #include <atomic>
 
-#include "DebouncerStrategy.h"
+#include "DebouncerImpuseRepeatStrategy.h"
 #include "BasicTimer.h"
 namespace LIO {
 /**
@@ -17,7 +17,7 @@ class Debouncer{
 private:
     enum class State{off, on};
     enum class TimerMode{off, on, initial};
-    DebouncerStrategy* debouncerStrategy;
+    DebouncerImpulseRepeatStrategy* debouncerStrategy;
     BasicTimer& timer;
     std::mutex strategyMutex;
     void debouncer();
@@ -42,7 +42,7 @@ public:
      * @brief Deterines how should debouncer handle the stream of events
      * @param strategy
      */
-    void setStrategy(DebouncerStrategy* strategy);
+    void setStrategy(DebouncerImpulseRepeatStrategy* strategy);
 
     /**
      * @brief raw 1->0 event handle

@@ -1,12 +1,12 @@
 #include<gtest/gtest.h>
-#include "DeboucerStrategy_mock.h"
+#include "DebouncerStrategy_mock.h"
 
 using namespace std;
 using namespace LIO;
 
 class DebounceStrategyTest : public testing::Test{
 public:
-    DeboucerStrategy_mock subject;
+    DebouncerStrategy_mock subject;
 };
 
 TEST_F(DebounceStrategyTest,withoutCallback){
@@ -16,8 +16,8 @@ TEST_F(DebounceStrategyTest,withoutCallback){
 TEST_F(DebounceStrategyTest,callbacks){
     EXPECT_CALL(subject,handleOnEvent()).Times(2);
     EXPECT_CALL(subject,handleOffEvent()).Times(1);
-    subject.setOnCallback(bind(&DeboucerStrategy_mock::handleOnEvent,&subject));
-    subject.setOffCallback(bind(&DeboucerStrategy_mock::handleOffEvent,&subject));
+    subject.setOnCallback(bind(&DebouncerStrategy_mock::handleOnEvent,&subject));
+    subject.setOffCallback(bind(&DebouncerStrategy_mock::handleOffEvent,&subject));
     subject.explicitOnCb();
     subject.explicitOnCb();
     subject.explicitOffCb();

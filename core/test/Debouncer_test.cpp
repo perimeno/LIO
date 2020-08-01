@@ -7,7 +7,7 @@
 
 #include "BasicTimerMock.h"
 
-#include "DeboucerStrategy_mock.h"
+#include "DebouncerStrategy_mock.h"
 
 
 using namespace std;
@@ -18,7 +18,7 @@ class Debounce_test : public ::testing::Test{
 public:
     BasicTimerMock timer;
     Debouncer subject{timer};
-    DeboucerStrategy_mock strategy;
+    DebouncerStrategy_mock strategy;
     virtual void SetUp()override{
         subject.setStrategy(&strategy);
     }

@@ -7,10 +7,10 @@
 
 #include "InputPin.h"
 #include "Debouncer.h"
-#include "DebouncerStrategyCbOnlyOnce.h"
+#include "DIRS_JustOneTick.h"
 
 namespace LIO {
-template <typename TDebouncerStrategy=DebouncerStrategyCbOnlyOnce>
+template <typename TDebouncerStrategy=DIRS_JustOneTick>
 /**
  * @brief The purpose of this class to debounce a raw input pin data asynchronously. It uses
  * TDebouncerStrategy to determine how should it operate after an event occurred.
