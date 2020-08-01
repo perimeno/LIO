@@ -13,7 +13,7 @@ class DebouncedInputTest : public testing::Test{
 public:
     InputPin_mock input_mock;
     BasicTimerMock timerMock;
-    DebouncedInput<> subject{input_mock,timerMock};
+    DebouncedInput subject{input_mock,timerMock};
     MOCK_METHOD0(onCb,void());
     MOCK_METHOD0(offCb,void());
 };

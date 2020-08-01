@@ -17,6 +17,7 @@ DebouncedInput::DebouncedInput(InputPin &port,
     debouncer.setStrategy(&strategy);
     debouncer.setDebounceInterval(debounceDuration);
     inputPort.SetEventCallback(bind(&DebouncedInput::inputEventProcessor,this,std::placeholders::_1));
+    inputPort.SetTriggerEdge(InputPin::TriggerEdge::Both);
     inputPort.StartListening();
 }
 
