@@ -28,11 +28,11 @@ public:
      */
     DebouncedInput(InputPin& port,
                    BasicTimer& timer,
-                   std::chrono::milliseconds debounceDuration=std::chrono::milliseconds(100));
+                   std::chrono::milliseconds debounceDuration=std::chrono::milliseconds(50));
     DebouncedInput(InputPin& port,
                    BasicTimer& timer,
                    DebouncerImpulseRepeatStrategy& DIRS_strategy,
-                   std::chrono::milliseconds debounceDuration=std::chrono::milliseconds(100));
+                   std::chrono::milliseconds debounceDuration=std::chrono::milliseconds(50));
     virtual ~DebouncedInput();
     /**
      * @brief Set the callback that should be called if a 0->1 event happened
