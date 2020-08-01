@@ -81,7 +81,7 @@ int main(){
 
         //create debouncer for sysfs input
         shared_ptr<BasicTimer> timer=make_shared<SoftTimer>();
-        DebouncedInput<>debouncedAsyncInput(*in_pin_sysfs,*timer);
+        DebouncedInput debouncedAsyncInput(*in_pin_sysfs,*timer);
 
         //set callback for debounced input and raw gpiolib input
         debouncedAsyncInput.setOnCallback(DebouncedOnEvent);
